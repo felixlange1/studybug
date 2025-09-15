@@ -1,9 +1,13 @@
+using System.Data;
+
+using Studybug.Data;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-
+builder.Services.AddHttpClient<ApiService>();
 
 var app = builder.Build();
 

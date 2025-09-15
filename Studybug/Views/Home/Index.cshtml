@@ -1,17 +1,36 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Get Flashcards</title>
+    <link rel="stylesheet" href="~/css/site.css">
+</head>
+@model Flashcard
 
 <setion ids="notes-input">
     <div class="text-center notes-input__form">
         <h1 class="display-4">Welcome to Studybug</h1>
         <p>Enter your notes to create flash cards</p>
-        <textarea type="text" name="notesInput" rows="5" width="50%"></textarea>
-        <button id="notes-input__button" type="submit" value="Go!" />
+        <form method="post" asp-controller="Home" asp-action="Index">
+        <textarea type="text" name="studyNotes" rows="5" width="50%"></textarea>
+        <button id="notes-input__button" type="submit">Go!</button>
+        </form>
     </div>
 </setion>
 
+@* Displays search results if any: *@
 <section id="results">
-    
-    
+    @if (Model != null)
+    {
+        <div class="flashcards">@Model.Answer</div> 
+    }
+    else if (Model != null)
+    {
+        <p>No flashcards could be made.</p>
+    }
+
+
 </section>
