@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using Studybug.Data;
 using Studybug.Models;
 
@@ -32,13 +33,19 @@ public class HomeController : Controller
 
        
         var response = await _apiService.GetFlashcardsAsync(studyNotes);
-        var flashcard = new Flashcard
-        {
-            Answer = response,
-            Question = ""
-        };
         
-        return View(flashcard);
+        if (!response.TrimStart().StartsWith("[") && !response.TrimStart().StartsWith("{"))
+        {
+            var parsedResponse = JObject.Parse(response);
+            var result = parsedResponse["result"]?.ToString();
+            ViewBag.Message = result;
+            return View();
+        }
+
+            var jObj = JObject.Parse(response);
+            var flashcards = JsonConvert.DeserializeObject<List<Flashcard>>(jObj["result"].ToString());
+
+        return View(flashcards);
     }
 
     

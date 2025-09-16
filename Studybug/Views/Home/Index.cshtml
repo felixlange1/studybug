@@ -8,14 +8,14 @@
     <title>Get Flashcards</title>
     <link rel="stylesheet" href="~/css/site.css">
 </head>
-@model Flashcard
+@model IEnumerable<Flashcard>
 
-<setion ids="notes-input">
+<setion id="notes-input">
     <div class="text-center notes-input__form">
         <h1 class="display-4">Welcome to Studybug</h1>
         <p>Enter your notes to create flash cards</p>
         <form method="post" asp-controller="Home" asp-action="Index">
-        <textarea type="text" name="studyNotes" rows="5" width="50%"></textarea>
+        <textarea type="text" name="studyNotes" rows="15" cols="100"></textarea>
         <button id="notes-input__button" type="submit">Go!</button>
         </form>
     </div>
@@ -23,9 +23,29 @@
 
 @* Displays search results if any: *@
 <section id="results">
-    @if (Model != null)
+    @if (Model != null && Model.Any())
     {
-        <div class="flashcards">@Model.Answer</div> 
+        @if (ViewBag.Message != null)
+        {
+            <div class="alert alert-info">@ViewBag.Message</div>
+        }
+        else
+        {
+            foreach (var flashcard in Model)
+            {
+                <div class="flashcards">
+                    <div class="flashcard">
+                        <div class="flashcard-question">
+                            <strong>Question: </strong>@flashcard.Question
+                        </div>
+                        <div class="flashcard-answer">
+                            <strong>Answer: </strong>@flashcard.Answer
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+        
     }
     else if (Model != null)
     {
