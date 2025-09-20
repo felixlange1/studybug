@@ -8,49 +8,97 @@
     <title>Get Flashcards</title>
     <link rel="stylesheet" href="~/css/site.css">
 </head>
+<body>
 @model IEnumerable<Flashcard>
 
 <setion id="notes-input">
-    <div class="text-center notes-input__form">
+    <div class="row">
+    <div class="header">
         <h1 class="display-4">Welcome to Studybug</h1>
         <p>Enter your notes to create flash cards</p>
-        <form method="post" asp-controller="Home" asp-action="Index">
-        <textarea type="text" name="studyNotes" rows="15" cols="100"></textarea>
-        <button id="notes-input__button" type="submit">Go!</button>
+    </div>
+        <form method="post" asp-controller="Home" asp-action="Index" id="notes-input__form">
+            <textarea type="text" name="studyNotes" rows="15" cols="100"></textarea>
+            <button id="notes-input__button" type="submit">Go!</button>
         </form>
+    
     </div>
 </setion>
 
 @* Displays search results if any: *@
 <section id="results">
-    @if (Model != null && Model.Any())
-    {
-        @if (ViewBag.Message != null)
-        {
-            <div class="alert alert-info">@ViewBag.Message</div>
-        }
-        else
-        {
-            foreach (var flashcard in Model)
+    <div class="row">
+        <ul class="flashcard__list">
+            @if (Model != null && Model.Any())
             {
-                <div class="flashcards">
-                    <div class="flashcard">
-                        <div class="flashcard-question">
-                            <strong>Question: </strong>@flashcard.Question
-                        </div>
-                        <div class="flashcard-answer">
-                            <strong>Answer: </strong>@flashcard.Answer
-                        </div>
-                    </div>
-                </div>
+                @if (ViewBag.Message != null)
+                {
+                    <div class="alert alert-info">@ViewBag.Message</div>
+                }
+                else
+                {
+
+                    foreach (var flashcard in Model)
+                    {
+
+                        <li class="flashcard">
+                            <div class="flashcard__wrapper">
+                            <div class="flashcard-question">
+                                <p><strong>Question: </strong>@flashcard.Question</p>
+                            </div>
+                            <div class="flashcard-answer">
+                                <p><strong>Answer: </strong>@flashcard.Answer</p>
+                            </div>
+                            </div>
+                        </li>
+
+                    }
+
+                }
+
             }
-        }
-        
-    }
-    else if (Model != null)
-    {
-        <p>No flashcards could be made.</p>
-    }
 
-
+            else if (Model != null)
+            {
+                <p>No flashcards could be made.</p>
+            }
+        </ul >
+        @* <ul class="flashcard__list"> *@
+        @*     <li class="flashcard"> *@
+        @*         <div class="flashcard__wrapper"> *@
+        @*             <div class="flashcard-question"> *@
+        @*                 <p><strong>Question: </strong>What is the formula for calculating the area of a triangle?</p> *@
+        @*             </div> *@
+        @*             <div class="flashcard-answer"> *@
+        @*                 <p><strong>Answer: </strong>Area = (1/2) * base * height</p> *@
+        @*             </div> *@
+        @*         </div> *@
+        @*     </li> *@
+        @*     <li class="flashcard"> *@
+        @*         <div class="flashcard__wrapper"> *@
+        @*             <div class="flashcard-question"> *@
+        @*                 <p><strong>Question: </strong>What is the formula for calculating the area of a triangle?</p> *@
+        @*             </div> *@
+        @*             <div class="flashcard-answer"> *@
+        @*                 <p><strong>Answer: </strong>Area = (1/2) * base * height</p> *@
+        @*             </div> *@
+        @*         </div> *@
+        @*     </li> *@
+        @*     <li class="flashcard"> *@
+        @*         <div class="flashcard__wrapper"> *@
+        @*             <div class="flashcard-question"> *@
+        @*                 <p><strong>Question: </strong>What is the formula for calculating the area of a triangle?</p> *@
+        @*             </div> *@
+        @*             <div class="flashcard-answer"> *@
+        @*                 <p><strong>Answer: </strong>Area = (1/2) * base * height</p> *@
+        @*             </div> *@
+        @*         </div> *@
+        @*     </li> *@
+        @* </ul> *@
+    </div>
 </section>
+
+
+<script src="~/js/flashcard.js"></script>
+</body>
+</html>
