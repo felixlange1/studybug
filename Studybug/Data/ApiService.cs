@@ -32,7 +32,7 @@ public class ApiService
         {
             messages = new[]
             {
-                new { role = "user", content = $"Turn these study notes into multiple flashcards: {studyNotes}. Please respond in JSON array format like this: Turn the following study notes into 3 flashcards. \nRespond only in JSON array format like this:\n[\n  {{ \"Question\": \"...\", \"Answer\": \"...\" }},\n  {{ \"Question\": \"...\", \"Answer\": \"...\" }},\n  {{ \"Question\": \"...\", \"Answer\": \"...\" }}\n]" }
+                new { role = "user", content = $"Turn these study notes into multiple flashcards: {studyNotes}. Please respond in JSON array format like this (Do NOT wrap the response in triple backticks or code blocks): [\n  {{ \"Question\": \"...\", \"Answer\": \"...\" }},\n  {{ \"Question\": \"...\", \"Answer\": \"...\" }},\n  {{ \"Question\": \"...\", \"Answer\": \"...\" }}\n]" }
             },
             web_access = false
         };

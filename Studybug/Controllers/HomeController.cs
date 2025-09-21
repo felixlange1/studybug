@@ -19,33 +19,39 @@ public class HomeController : Controller
     }
     
 
-    // public IActionResult Index()
-    // {
-    //     return View();
-    // }
-
     public async Task<IActionResult> Index(string studyNotes)
     {
         if (string.IsNullOrEmpty(studyNotes))
         {
             return View();
         }
-
-       
+        
         var response = await _apiService.GetFlashcardsAsync(studyNotes);
         
-        if (!response.TrimStart().StartsWith("[") && !response.TrimStart().StartsWith("{"))
+        List<Flashcard> flashcards = new();
+
+        try
         {
-            var parsedResponse = JObject.Parse(response);
-            var result = parsedResponse["result"]?.ToString();
-            ViewBag.Message = result;
-            return View();
+            var jObj = JObject.Parse(response);
+            var result = jObj["result"]?.ToString().Trim();
+
+            if (!string.IsNullOrEmpty(result) && (result.StartsWith("[") || result.StartsWith("{")))
+            {
+                    flashcards = JsonConvert.DeserializeObject<List<Flashcard>>(result);
+            }
+            else
+            {
+                ViewBag.Message = result; // plain string from API
+            }
+        }
+        catch (JsonReaderException)
+        {
+
+            ViewBag.Message = response;
         }
 
-            var jObj = JObject.Parse(response);
-            var flashcards = JsonConvert.DeserializeObject<List<Flashcard>>(jObj["result"].ToString());
-
         return View(flashcards);
+
     }
 
     

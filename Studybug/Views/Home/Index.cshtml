@@ -40,27 +40,23 @@
 
                     foreach (var flashcard in Model)
                     {
-
                         <li class="flashcard">
                             <div class="flashcard__wrapper">
-                            <div class="flashcard-question">
-                                <p><strong>Question: </strong>@flashcard.Question</p>
-                            </div>
-                            <div class="flashcard-answer">
-                                <p><strong>Answer: </strong>@flashcard.Answer</p>
-                            </div>
+                                <div class="flashcard-question">
+                                    <p><strong>Question: </strong>@flashcard.Question</p>
+                                </div>
+                                <div class="flashcard-answer">
+                                    <p><strong>Answer: </strong>@flashcard.Answer</p>
+                                </div>
                             </div>
                         </li>
-
                     }
-
                 }
-
             }
 
             else if (Model != null)
             {
-                <p>No flashcards could be made.</p>
+                <p>No flashcards could be made. You possibly didn't provide an actual study note.</p>
             }
         </ul >
         @* <ul class="flashcard__list"> *@
@@ -77,20 +73,24 @@
         @*     <li class="flashcard"> *@
         @*         <div class="flashcard__wrapper"> *@
         @*             <div class="flashcard-question"> *@
-        @*                 <p><strong>Question: </strong>What is the formula for calculating the area of a triangle?</p> *@
+        @*                 <p><strong>Question: </strong>What was an example of militarism contirbuting to tensions between Germany and Britain?</p> *@
         @*             </div> *@
         @*             <div class="flashcard-answer"> *@
-        @*                 <p><strong>Answer: </strong>Area = (1/2) * base * height</p> *@
+        @*                 <p><strong>Answer: </strong>Lorem ipsum this is a really long answer spanning multiple lines, look at it goooo. Yeah now it's done.</p> *@
         @*             </div> *@
         @*         </div> *@
         @*     </li> *@
         @*     <li class="flashcard"> *@
         @*         <div class="flashcard__wrapper"> *@
         @*             <div class="flashcard-question"> *@
-        @*                 <p><strong>Question: </strong>What is the formula for calculating the area of a triangle?</p> *@
+        @* *@
+        @*                     <p><strong>Question: </strong>What is the formula for calculating the area of a triangle?</p> *@
+        @* *@
         @*             </div> *@
         @*             <div class="flashcard-answer"> *@
-        @*                 <p><strong>Answer: </strong>Area = (1/2) * base * height</p> *@
+        @* *@
+        @*                     <p><strong>Answer: </strong>Area = (1/2) * base * height</p> *@
+        @* *@
         @*             </div> *@
         @*         </div> *@
         @*     </li> *@
